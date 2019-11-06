@@ -15,7 +15,7 @@ class MainViewModel : ViewModel() {
 
     fun loadData() {
         viewModelScope.launch {
-            _list.value = speakers.subList(fromIndex = 2, toIndex = speakers.lastIndex)
+            _list.value = speakers
         }
     }
 

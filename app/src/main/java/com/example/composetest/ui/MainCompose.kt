@@ -17,7 +17,7 @@ import androidx.ui.material.themeTextStyle
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.themeColor
 import com.example.composetest.themeTypography
-import com.example.composetest.ui.component.BottomSection
+import com.example.composetest.ui.component.LoadMenuComponent
 import com.example.composetest.ui.component.SessionComponent
 import com.example.composetest.ui.component.TopMenu
 import com.example.composetest.ui.util.observe
@@ -35,13 +35,13 @@ fun MainCompose(
                         HeightSpacer(12.dp)
                         Text("Timetable", style = +themeTextStyle { h6 })
                         HeightSpacer(12.dp)
-                        BottomSection(
+                        LoadMenuComponent(
                             hasCancel = true,
                             listenerClick = { viewModel.loadData() },
                             cancelClick = { viewModel.clear() }
                         )
                         HeightSpacer(height = 12.dp)
-                        MainBodyCompose(viewModel)
+                        SessionListCompose(viewModel)
                     }
                 }
             }
@@ -50,7 +50,7 @@ fun MainCompose(
 }
 
 @Composable
-fun MainBodyCompose(
+fun SessionListCompose(
     viewModel: MainViewModel
 ) {
     val list = +observe(viewModel.list)

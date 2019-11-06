@@ -15,7 +15,7 @@ import androidx.ui.tooling.preview.Preview
 import com.example.composetest.themeColor
 
 @Composable
-fun BottomSection(
+fun LoadMenuComponent(
     hasCancel: Boolean = false,
     listenerClick: () -> Unit = {},
     cancelClick: () -> Unit = {}
@@ -49,7 +49,7 @@ fun Preview_BottomSection() {
     MaterialTheme(colors = themeColor) {
         Surface {
             Padding(12.dp) {
-                BottomSection()
+                LoadMenuComponent()
             }
         }
     }
@@ -61,7 +61,7 @@ fun Preview_BottomSection_HasCancel() {
     MaterialTheme(colors = themeColor) {
         Surface {
             Padding(12.dp) {
-                BottomSection()
+                LoadMenuComponent()
             }
         }
     }

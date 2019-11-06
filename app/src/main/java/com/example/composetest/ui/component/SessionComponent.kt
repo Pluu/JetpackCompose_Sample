@@ -2,6 +2,7 @@ package com.example.composetest.ui.component
 
 import androidx.compose.Composable
 import androidx.compose.unaryPlus
+import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.ColoredRect
@@ -9,6 +10,7 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.AspectRatio
 import androidx.ui.layout.Column
+import androidx.ui.layout.Container
 import androidx.ui.layout.FlexRow
 import androidx.ui.layout.HeightSpacer
 import androidx.ui.layout.Padding
@@ -40,14 +42,15 @@ fun SessionComponent(session: Session) {
                     overflow = TextOverflow.Ellipsis
                 )
                 if (session.speaker != null) {
-                    ContainerWithBackground(color = Color.LightGray) {
-                        Text(
-                            text = session.speaker,
-                            style = +themeTextStyle { h5 },
-                            paragraphStyle = ParagraphStyle(TextAlign.Right)
-                        )
-                        ColoredRect(color = Color.Green, modifier = AspectRatio(2f))
-
+                    Container(expanded = true, alignment = Alignment.CenterRight) {
+                        ContainerWithBackground(color = Color.LightGray) {
+                            Text(
+                                text = session.speaker,
+                                style = +themeTextStyle { h5 },
+                                paragraphStyle = ParagraphStyle(TextAlign.Right)
+                            )
+                            ColoredRect(color = Color.Green, modifier = AspectRatio(2f))
+                        }
                     }
                 }
                 Text(text = "${session.startTime}~${session.endTime}")
