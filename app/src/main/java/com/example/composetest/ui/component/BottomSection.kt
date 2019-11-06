@@ -15,13 +15,17 @@ import androidx.ui.tooling.preview.Preview
 import com.example.composetest.themeColor
 
 @Composable
-fun BottomSection(hasCancel: Boolean = false) {
+fun BottomSection(
+    hasCancel: Boolean = false,
+    listenerClick: () -> Unit = {},
+    cancelClick: () -> Unit = {}
+) {
     FlexRow {
         expanded(1f) {
             Button(
-                "Listen",
+                "Load",
                 style = ContainedButtonStyle(rippleColor = Color.Black),
-                onClick = {}
+                onClick = listenerClick
             )
         }
         if (hasCancel) {
@@ -30,9 +34,9 @@ fun BottomSection(hasCancel: Boolean = false) {
             }
             inflexible {
                 Button(
-                    text = "Cancel",
+                    text = "Clear",
                     style = TextButtonStyle(contentColor = Color.Gray),
-                    onClick = {}
+                    onClick = cancelClick
                 )
             }
         }
@@ -57,7 +61,7 @@ fun Preview_BottomSection_HasCancel() {
     MaterialTheme(colors = themeColor) {
         Surface {
             Padding(12.dp) {
-                BottomSection(hasCancel = true)
+                BottomSection()
             }
         }
     }
