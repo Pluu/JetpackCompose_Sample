@@ -21,7 +21,6 @@ import com.example.composetest.ui.component.LoadMenuComponent
 import com.example.composetest.ui.component.SessionComponent
 import com.example.composetest.ui.component.TopMenu
 import com.example.composetest.ui.util.observe
-import org.threeten.bp.LocalTime
 
 @Composable
 fun MainCompose(
@@ -56,15 +55,10 @@ fun SessionListCompose(
 ) {
     val list = +observe(viewModel.list)
     val iterator = list.orEmpty().iterator()
-    val now = LocalTime.now()
 
     while (iterator.hasNext()) {
         HeightSpacer(height = 8.dp)
-
-        val session = iterator.next()
-        val isActive = session.startTime.isBefore(now) && session.endTime.isAfter(now)
-
-        SessionComponent(session = session, isActive = isActive)
+        SessionComponent(session = iterator.next())
         HeightSpacer(height = 8.dp)
         if (iterator.hasNext()) {
             Divider(color = Color.Red, height = 1.dp)

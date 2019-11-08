@@ -7,5 +7,6 @@ class Session(
     val speaker: String? = null,
     val startTime: LocalTime,
     val endTime: LocalTime,
-    val room: List<String>
+    val room: List<String>,
+    val isActive: Boolean = false
 )

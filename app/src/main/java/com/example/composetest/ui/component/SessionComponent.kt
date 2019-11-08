@@ -29,11 +29,11 @@ import com.example.composetest.themeColor
 import com.example.composetest.themeTypography
 
 @Composable
-fun SessionComponent(session: Session, isActive: Boolean) {
+fun SessionComponent(session: Session) {
     Card(
         shape = RoundedCornerShape(4.dp),
         color = +themeColor {
-            if (isActive) Color(0xFFB00020) else Color.White
+            if (session.isActive) Color(0xFFB00020) else Color.White
         }
     ) {
         Padding(padding = 12.dp) {
@@ -42,7 +42,7 @@ fun SessionComponent(session: Session, isActive: Boolean) {
                     text = session.title,
                     maxLines = 2,
                     style = +themeTextStyle {
-                        h3.copy(if (isActive) Color.White else h3.color)
+                        h3.copy(if (session.isActive) Color.White else h3.color)
                     },
                     overflow = TextOverflow.Ellipsis
                 )
@@ -50,7 +50,7 @@ fun SessionComponent(session: Session, isActive: Boolean) {
                     Container(expanded = true, alignment = Alignment.CenterRight) {
                         Text(
                             text = session.speaker,
-                            style = +themeTextStyle { if (isActive) h5.copy(color = Color.White) else h5 }
+                            style = +themeTextStyle { if (session.isActive) h5.copy(color = Color.White) else h5 }
                         )
                     }
                 }
@@ -58,7 +58,7 @@ fun SessionComponent(session: Session, isActive: Boolean) {
                 TimeComponent(
                     startTime = session.startTime,
                     endTime = session.endTime,
-                    isActive = isActive
+                    isActive = session.isActive
                 )
                 HeightSpacer(height = 8.dp)
                 Row {
@@ -92,7 +92,7 @@ fun Preview_SessionComponent() {
     MaterialTheme(colors = themeColor, typography = themeTypography) {
         Surface {
             Padding(12.dp) {
-                SessionComponent(speakers[4], true)
+                SessionComponent(speakers[4])
             }
         }
     }
@@ -104,7 +104,7 @@ fun Preview_SessionComponent2() {
     MaterialTheme(colors = themeColor, typography = themeTypography) {
         Surface {
             Padding(12.dp) {
-                SessionComponent(speakers[4], false)
+                SessionComponent(speakers[3])
             }
         }
     }

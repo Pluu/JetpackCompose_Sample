@@ -40,7 +40,8 @@ val speakers = listOf(
         speaker = "노현석",
         startTime = startEventDate.plusMinutes(115),
         endTime = startEventDate.plusMinutes(145),
-        room = listOf("A")
+        room = listOf("A"),
+        isActive = true
     ),
     Session(
         title = "Break Time",
