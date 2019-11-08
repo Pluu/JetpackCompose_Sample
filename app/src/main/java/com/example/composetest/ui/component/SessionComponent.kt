@@ -16,32 +16,20 @@ import androidx.ui.layout.Row
 import androidx.ui.layout.WidthSpacer
 import androidx.ui.material.Button
 import androidx.ui.material.ContainedButtonStyle
-import androidx.ui.material.MaterialColors
 import androidx.ui.material.MaterialTheme
-import androidx.ui.material.MaterialTypography
 import androidx.ui.material.surface.Card
 import androidx.ui.material.surface.Surface
 import androidx.ui.material.themeColor
 import androidx.ui.material.themeTextStyle
-import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.data.speakers
 import com.example.composetest.model.Session
 import com.example.composetest.themeColor
 import com.example.composetest.themeTypography
-import org.threeten.bp.LocalTime
-
-private data class ListItemTextStyle(
-    val style: MaterialTypography.() -> TextStyle,
-    val color: MaterialColors.() -> Color
-)
 
 @Composable
-fun SessionComponent(session: Session) {
-    val now = LocalTime.now()
-    val isActive = session.startTime.isBefore(now) && session.endTime.isAfter(now)
-
+fun SessionComponent(session: Session, isActive: Boolean) {
     Card(
         shape = RoundedCornerShape(4.dp),
         color = +themeColor {
@@ -98,13 +86,25 @@ fun SessionComponent(session: Session) {
     }
 }
 
-@Preview("Session Component")
+@Preview("Session Component - Active")
 @Composable
 fun Preview_SessionComponent() {
     MaterialTheme(colors = themeColor, typography = themeTypography) {
         Surface {
             Padding(12.dp) {
-                SessionComponent(speakers[4])
+                SessionComponent(speakers[4], true)
+            }
+        }
+    }
+}
+
+@Preview("Session Component")
+@Composable
+fun Preview_SessionComponent2() {
+    MaterialTheme(colors = themeColor, typography = themeTypography) {
+        Surface {
+            Padding(12.dp) {
+                SessionComponent(speakers[4], false)
             }
         }
     }
