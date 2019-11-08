@@ -5,56 +5,84 @@ import androidx.compose.unaryPlus
 import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
-import androidx.ui.foundation.ColoredRect
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.AspectRatio
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
 import androidx.ui.layout.FlexRow
 import androidx.ui.layout.HeightSpacer
 import androidx.ui.layout.Padding
+import androidx.ui.layout.Row
+import androidx.ui.layout.WidthSpacer
 import androidx.ui.material.Button
 import androidx.ui.material.ContainedButtonStyle
+import androidx.ui.material.MaterialColors
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.MaterialTypography
 import androidx.ui.material.surface.Card
 import androidx.ui.material.surface.Surface
+import androidx.ui.material.themeColor
 import androidx.ui.material.themeTextStyle
-import androidx.ui.text.ParagraphStyle
-import androidx.ui.text.style.TextAlign
+import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.data.speakers
 import com.example.composetest.model.Session
 import com.example.composetest.themeColor
 import com.example.composetest.themeTypography
-import com.example.composetest.ui.component.core.ContainerWithBackground
+import org.threeten.bp.LocalTime
+
+private data class ListItemTextStyle(
+    val style: MaterialTypography.() -> TextStyle,
+    val color: MaterialColors.() -> Color
+)
 
 @Composable
 fun SessionComponent(session: Session) {
-    Card(shape = RoundedCornerShape(4.dp)) {
+    val now = LocalTime.now()
+    val isActive = session.startTime.isBefore(now) && session.endTime.isAfter(now)
+
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        color = +themeColor {
+            if (isActive) Color(0xFFB00020) else Color.White
+        }
+    ) {
         Padding(padding = 12.dp) {
             Column {
                 Text(
                     text = session.title,
                     maxLines = 2,
-                    style = +themeTextStyle { h3 },
+                    style = +themeTextStyle {
+                        h3.copy(if (isActive) Color.White else h3.color)
+                    },
                     overflow = TextOverflow.Ellipsis
                 )
                 if (session.speaker != null) {
                     Container(expanded = true, alignment = Alignment.CenterRight) {
-                        ContainerWithBackground(color = Color.LightGray) {
-                            Text(
-                                text = session.speaker,
-                                style = +themeTextStyle { h5 },
-                                paragraphStyle = ParagraphStyle(TextAlign.Right)
-                            )
-                            ColoredRect(color = Color.Green, modifier = AspectRatio(2f))
+                        Text(
+                            text = session.speaker,
+                            style = +themeTextStyle { if (isActive) h5.copy(color = Color.White) else h5 }
+                        )
+                    }
+                }
+                HeightSpacer(height = 12.dp)
+                TimeComponent(
+                    startTime = session.startTime,
+                    endTime = session.endTime,
+                    isActive = isActive
+                )
+                HeightSpacer(height = 8.dp)
+                Row {
+                    val rooms = session.room.iterator()
+                    while (rooms.hasNext()) {
+                        TrackComponent(rooms.next())
+                        if (rooms.hasNext()) {
+                            WidthSpacer(width = 4.dp)
                         }
                     }
                 }
-                Text(text = "${session.startTime}~${session.endTime}")
-                Text(text = session.room)
+
                 HeightSpacer(height = 8.dp)
                 FlexRow {
                     expanded(1f) {
