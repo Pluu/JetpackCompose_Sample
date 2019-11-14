@@ -1,6 +1,7 @@
 package com.example.composetest.ui
 
 import androidx.compose.Composable
+import androidx.compose.state
 import androidx.compose.unaryPlus
 import androidx.ui.core.Text
 import androidx.ui.core.dp
@@ -26,6 +27,7 @@ import com.example.composetest.ui.util.observe
 fun MainCompose(
     viewModel: MainViewModel
 ) {
+    val loaded = +state { false }
     FlexColumn {
         flexible(flex = 1f) {
             VerticalScroller {
@@ -37,8 +39,16 @@ fun MainCompose(
                         HeightSpacer(12.dp)
                         LoadMenuComponent(
                             hasCancel = true,
-                            listenerClick = { viewModel.loadData() },
-                            cancelClick = { viewModel.clear() }
+                            listenerClick = {
+                                if (!loaded.value) {
+                                    loaded.value = true
+                                    viewModel.loadData()
+                                }
+                            },
+                            cancelClick = {
+                                loaded.value = false
+                                viewModel.clear()
+                            }
                         )
                         HeightSpacer(height = 12.dp)
                         SessionListCompose(viewModel)

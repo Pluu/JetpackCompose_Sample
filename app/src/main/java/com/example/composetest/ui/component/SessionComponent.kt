@@ -42,7 +42,7 @@ fun SessionComponent(session: Session) {
                     text = session.title,
                     maxLines = 2,
                     style = +themeTextStyle {
-                        h3.copy(if (session.isActive) Color.White else h3.color)
+                        if (session.isActive) h3.copy(color = Color.White) else h3
                     },
                     overflow = TextOverflow.Ellipsis
                 )
@@ -50,7 +50,9 @@ fun SessionComponent(session: Session) {
                     Container(expanded = true, alignment = Alignment.CenterRight) {
                         Text(
                             text = session.speaker,
-                            style = +themeTextStyle { if (session.isActive) h5.copy(color = Color.White) else h5 }
+                            style = +themeTextStyle {
+                                if (session.isActive) h5.copy(color = Color.White) else h5
+                            }
                         )
                     }
                 }
