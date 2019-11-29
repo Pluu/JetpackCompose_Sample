@@ -106,7 +106,7 @@ fun Preview_SessionComponent2() {
     MaterialTheme(colors = themeColor, typography = themeTypography) {
         Surface {
             Padding(12.dp) {
-                SessionComponent(speakers[3])
+                SessionComponent(speakers[5])
             }
         }
     }

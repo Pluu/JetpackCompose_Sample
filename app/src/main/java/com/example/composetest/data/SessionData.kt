@@ -4,49 +4,61 @@ import com.example.composetest.model.Session
 import org.threeten.bp.LocalDateTime
 
 private val startEventDate = LocalDateTime.of(
-    2019, 10, 15,
-    18, 35
+    2019, 10, 30,
+    12, 0,0
 ).toLocalTime()
 
 val speakers = listOf(
     Session(
         title = "체크인",
         startTime = startEventDate,
-        endTime = startEventDate.plusMinutes(45),
-        room = listOf("A", "B")
+        endTime = startEventDate.plusMinutes(60),
+        room = listOf("창업다락")
     ),
     Session(
         title = "Keynote",
-        startTime = startEventDate.plusMinutes(45),
-        endTime = startEventDate.plusMinutes(55),
-        room = listOf("A", "B")
-    ),
-    Session(
-        title = "ML을 여행하는 안드로이드 히치하이커를 위한 안내서 - ML Vision편",
-        speaker = "안성용",
         startTime = startEventDate.plusMinutes(60),
-        endTime = startEventDate.plusMinutes(75),
-        room = listOf("A")
+        endTime = startEventDate.plusMinutes(70),
+        room = listOf("창업다락")
     ),
     Session(
-        title = "Stetho의 후계 Flipper 다루기",
-        speaker = "안세원",
-        startTime = startEventDate.plusMinutes(75),
-        endTime = startEventDate.plusMinutes(105),
-        room = listOf("A")
+        title = "Flutter",
+        startTime = startEventDate.plusMinutes(70),
+        endTime = startEventDate.plusMinutes(170),
+        room = listOf("창업다락")
+    ),
+    Session(
+        title = "Break Time",
+        startTime = startEventDate.plusMinutes(170),
+        endTime = startEventDate.plusMinutes(180),
+        room = listOf("창업다락")
     ),
     Session(
         title = "최신 AndroidX 체크",
         speaker = "노현석",
-        startTime = startEventDate.plusMinutes(115),
-        endTime = startEventDate.plusMinutes(145),
-        room = listOf("A"),
+        startTime = startEventDate.plusMinutes(180),
+        endTime = startEventDate.plusMinutes(210),
+        room = listOf("창업다락"),
         isActive = true
     ),
     Session(
+        title = "Android 세션2",
+        speaker = "Speaker",
+        startTime = startEventDate.plusMinutes(215),
+        endTime = startEventDate.plusMinutes(245),
+        room = listOf("창업다락")
+    ),
+    Session(
+        title = "Android 세션3",
+        speaker = "Speaker",
+        startTime = startEventDate.plusMinutes(250),
+        endTime = startEventDate.plusMinutes(280),
+        room = listOf("창업다락")
+    ),
+    Session(
         title = "Break Time",
-        startTime = startEventDate.plusMinutes(145),
-        endTime = startEventDate.plusMinutes(155),
-        room = listOf("A", "B")
+        startTime = startEventDate.plusMinutes(280),
+        endTime = startEventDate.plusMinutes(290),
+        room = listOf("창업다락")
     )
 )

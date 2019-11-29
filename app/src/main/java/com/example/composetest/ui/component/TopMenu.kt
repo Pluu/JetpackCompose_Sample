@@ -25,7 +25,7 @@ fun TopMenu() {
             DrawImage(
                 image = imageFromResource(
                     context.resources,
-                    resId = R.drawable.pangyo
+                    resId = R.drawable.incheon
                 )
             )
         }
