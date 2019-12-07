@@ -19,8 +19,6 @@ import androidx.ui.material.ContainedButtonStyle
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Card
 import androidx.ui.material.surface.Surface
-import androidx.ui.material.themeColor
-import androidx.ui.material.themeTextStyle
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.data.speakers
@@ -32,27 +30,22 @@ import com.example.composetest.themeTypography
 fun SessionComponent(session: Session) {
     Card(
         shape = RoundedCornerShape(4.dp),
-        color = +themeColor {
-            if (session.isActive) Color(0xFFB00020) else Color.White
-        }
+        color = if (session.isActive) Color(0xFFB00020) else Color.White
     ) {
+        val textColor = if (session.isActive) Color.White else (+MaterialTheme.colors()).primary
         Padding(padding = 12.dp) {
             Column {
                 Text(
                     text = session.title,
                     maxLines = 2,
-                    style = +themeTextStyle {
-                        if (session.isActive) h3.copy(color = Color.White) else h3
-                    },
+                    style = (+MaterialTheme.typography()).h3.copy(color = textColor),
                     overflow = TextOverflow.Ellipsis
                 )
                 if (session.speaker != null) {
                     Container(expanded = true, alignment = Alignment.CenterRight) {
                         Text(
                             text = session.speaker,
-                            style = +themeTextStyle {
-                                if (session.isActive) h5.copy(color = Color.White) else h5
-                            }
+                            style = (+MaterialTheme.typography()).h5.copy(color = textColor)
                         )
                     }
                 }

@@ -14,7 +14,6 @@ import androidx.ui.layout.Padding
 import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Surface
-import androidx.ui.material.themeTextStyle
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.themeColor
 import com.example.composetest.themeTypography
@@ -35,7 +34,7 @@ fun MainCompose(
                     Column {
                         TopMenu()
                         HeightSpacer(12.dp)
-                        Text("Timetable", style = +themeTextStyle { h6 })
+                        Text(text = "Timetable", style = (+MaterialTheme.typography()).h6)
                         HeightSpacer(12.dp)
                         LoadMenuComponent(
                             hasCancel = true,
@@ -63,7 +62,7 @@ fun MainCompose(
 fun SessionListCompose(
     viewModel: MainViewModel
 ) {
-    val list = +observe(viewModel.list)
+    val list = viewModel.list.observe()
     val iterator = list.orEmpty().iterator()
 
     while (iterator.hasNext()) {

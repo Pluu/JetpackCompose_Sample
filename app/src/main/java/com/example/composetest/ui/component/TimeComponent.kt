@@ -8,8 +8,6 @@ import androidx.ui.graphics.Color
 import androidx.ui.layout.Padding
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Surface
-import androidx.ui.material.themeColor
-import androidx.ui.material.themeTextStyle
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.themeColor
 import com.example.composetest.themeTypography
@@ -24,12 +22,10 @@ fun TimeComponent(
 ) {
     Text(
         text = "$startTime ~ (${ChronoUnit.MINUTES.between(startTime, endTime)}min)",
-        style = +themeTextStyle {
-            if (isActive) {
-                body1.copy(color = Color.White)
-            } else {
-                body1
-            }
+        style = if (isActive) {
+            (+MaterialTheme.typography()).h5.copy(color = Color.White)
+        } else {
+            (+MaterialTheme.typography()).h5
         }
     )
 }
@@ -39,11 +35,7 @@ fun TimeComponent(
 fun Preview_TimeComponent() {
     val time = LocalTime.of(1, 1, 1)
     MaterialTheme(colors = themeColor, typography = themeTypography) {
-        Surface(
-            color = +themeColor {
-                Color.Red
-            }
-        ) {
+        Surface(color = Color.Red) {
             Padding(12.dp) {
                 TimeComponent(
                     startTime = time,
@@ -60,11 +52,7 @@ fun Preview_TimeComponent() {
 fun Preview_TimeComponent2() {
     val time = LocalTime.of(1, 1, 1)
     MaterialTheme(colors = themeColor, typography = themeTypography) {
-        Surface(
-            color = +themeColor {
-                Color.White
-            }
-        ) {
+        Surface(color = Color.White) {
             Padding(12.dp) {
                 TimeComponent(
                     startTime = time,

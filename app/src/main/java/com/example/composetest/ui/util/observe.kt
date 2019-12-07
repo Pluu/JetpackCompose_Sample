@@ -1,20 +1,19 @@
 package com.example.composetest.ui.util
 
-import androidx.compose.effectOf
-import androidx.compose.memo
+import androidx.compose.Composable
 import androidx.compose.onCommit
 import androidx.compose.state
+import androidx.compose.unaryPlus
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 
-fun <T> observe(data: LiveData<T>) = effectOf<T?> {
-    val result = +state { data.value }
-    val observer = +memo { Observer<T> { result.value = it } }
-
-    +onCommit(data) {
-        data.observeForever(observer)
-        onDispose { data.removeObserver(observer) }
+@Composable
+fun <T> LiveData<T>.observe(): T? {
+    val result = +state { value }
+    +onCommit(this) {
+        val observer = Observer<T> { result.value = it }
+        observeForever(observer)
+        onDispose { removeObserver(observer) }
     }
-
-    result.value
+    return result.value
 }

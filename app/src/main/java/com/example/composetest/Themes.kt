@@ -2,12 +2,12 @@ package com.example.composetest
 
 import androidx.ui.core.sp
 import androidx.ui.graphics.Color
-import androidx.ui.material.MaterialColors
-import androidx.ui.material.MaterialTypography
+import androidx.ui.material.ColorPalette
+import androidx.ui.material.Typography
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
 
-val themeColor = MaterialColors(
+val themeColor: ColorPalette = ColorPalette(
     primary = Color(0xFF03A9F4),
     primaryVariant = Color(0xFF0288D1),
     onPrimary = Color.White,
@@ -21,7 +21,7 @@ val themeColor = MaterialColors(
     onError = Color.White
 )
 
-val themeTypography = MaterialTypography(
+val themeTypography: Typography = Typography(
     h3 = TextStyle(fontSize = 40.sp, color = MaterialColor.HOT_PINK, fontWeight = FontWeight.Bold)
 )
 
